@@ -7,7 +7,13 @@
 package com.crio.qeats.exchanges;
 
 import com.crio.qeats.dto.Restaurant;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -46,10 +52,11 @@ import lombok.NoArgsConstructor;
 //      ]
 //    }
 //  ]
+// }
 @Data
 @AllArgsConstructor
 public class GetRestaurantsResponse {
-
+  @NotNull
+  private List<Restaurant> restaurants = new ArrayList<>();
 }
 
-// }

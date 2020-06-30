@@ -11,6 +11,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.concurrent.Future;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 public interface RestaurantRepositoryService {
 

@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 // Implement Controller using Spring annotations.
 // Remember, annotations have various "targets". They can be class level, method level or others.
 
+@Log4j2
+@RequestMapping(RestaurantController.RESTAURANT_API_ENDPOINT)
+@RestController
 public class RestaurantController {
 
   public static final String RESTAURANT_API_ENDPOINT = "/qeats/v1";
@@ -39,13 +43,10 @@ public class RestaurantController {
 
   @Autowired
   private RestaurantService restaurantService;
-
-
-
   @GetMapping(RESTAURANTS_API)
   public ResponseEntity<GetRestaurantsResponse> getRestaurants(
-      GetRestaurantsRequest getRestaurantsRequest) {
-
+      @Valid GetRestaurantsRequest getRestaurantsRequest) {
+    
     log.info("getRestaurants called with {}", getRestaurantsRequest);
     GetRestaurantsResponse getRestaurantsResponse;
 
@@ -54,7 +55,7 @@ public class RestaurantController {
           .findAllRestaurantsCloseBy(getRestaurantsRequest, LocalTime.now());
       log.info("getRestaurants returned {}", getRestaurantsResponse);
       //CHECKSTYLE:ON
-
+        System.out.println("sjagdj.....");
     return ResponseEntity.ok().body(getRestaurantsResponse);
   }
 

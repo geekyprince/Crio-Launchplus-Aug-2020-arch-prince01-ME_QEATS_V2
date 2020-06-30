@@ -16,12 +16,12 @@ import org.springframework.stereotype.Service;
 
 
 // CRIO_UNCOMMENT_ONLY_START_MODULE_RESTAURANTSAPI
-// @Service
+@Service
 // CRIO_UNCOMMENT_ONLY_END_MODULE_RESTAURANTSAPI
 public class RestaurantRepositoryServiceDummyImpl implements RestaurantRepositoryService {
   private static final String FIXTURES = "fixtures/exchanges";
   private ObjectMapper objectMapper = new ObjectMapper();
-
+  
   private List<Restaurant> loadRestaurantsDuringNormalHours() throws IOException {
     String fixture =
         FixtureHelpers.fixture(FIXTURES + "/normal_hours_list_of_restaurants.json");
@@ -39,19 +39,19 @@ public class RestaurantRepositoryServiceDummyImpl implements RestaurantRepositor
   public List<Restaurant> findAllRestaurantsCloseBy(Double latitude, Double longitude,
       LocalTime currentTime, Double servingRadiusInKms) {
     List<Restaurant> restaurantList = new ArrayList<>();
+    System.out.println(currentTime);
     try {
       restaurantList = loadRestaurantsDuringNormalHours();
     } catch (IOException e) {
       e.printStackTrace();
     }
+    System.out.println(currentTime);
+    System.out.println(restaurantList);
     for (Restaurant restaurant : restaurantList) {
       restaurant.setLatitude(latitude + ThreadLocalRandom.current().nextDouble(0.000001, 0.2));
       restaurant.setLongitude(longitude + ThreadLocalRandom.current().nextDouble(0.000001, 0.2));
     }
     return restaurantList;
   }
-
-
-
 }
 

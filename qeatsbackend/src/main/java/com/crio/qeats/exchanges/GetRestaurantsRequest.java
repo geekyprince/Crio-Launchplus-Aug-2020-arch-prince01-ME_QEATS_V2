@@ -9,9 +9,14 @@ package com.crio.qeats.exchanges;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 // TODO: CRIO_TASK_MODULE_RESTAURANTSAPI
 //  Implement GetRestaurantsRequest.
@@ -21,10 +26,16 @@ import lombok.NoArgsConstructor;
 //  /qeats/v1/restaurants?latitude=28.4900591&longitude=77.536386&searchFor=tamil,
 //  this class should be able to deserialize lat/long and optional searchFor from that.
 @Data
-@NoArgsConstructor
+@AllArgsConstructor
 public class GetRestaurantsRequest {
+  @NotNull
+  @Max(90)
+  @Min(-90)
+  private Double latitude;
 
-
-
+  @NotNull
+  @Max(180)
+  @Min(-180)
+  private Double longitude;
 }
 

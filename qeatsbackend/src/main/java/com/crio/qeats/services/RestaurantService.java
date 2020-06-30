@@ -10,6 +10,7 @@ package com.crio.qeats.services;
 import com.crio.qeats.exchanges.GetRestaurantsRequest;
 import com.crio.qeats.exchanges.GetRestaurantsResponse;
 import java.time.LocalTime;
+import java.util.List;
 
 public interface RestaurantService {
 
@@ -26,6 +27,5 @@ public interface RestaurantService {
    */
   GetRestaurantsResponse findAllRestaurantsCloseBy(
       GetRestaurantsRequest getRestaurantsRequest, LocalTime currentTime);
-
-
+      
 }
