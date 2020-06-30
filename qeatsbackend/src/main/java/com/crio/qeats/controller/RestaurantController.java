@@ -9,9 +9,12 @@ package com.crio.qeats.controller;
 import com.crio.qeats.exchanges.GetRestaurantsRequest;
 import com.crio.qeats.exchanges.GetRestaurantsResponse;
 import com.crio.qeats.services.RestaurantService;
+
 import java.time.LocalTime;
 import javax.validation.Valid;
+
 import lombok.extern.log4j.Log4j2;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -43,6 +46,7 @@ public class RestaurantController {
 
   @Autowired
   private RestaurantService restaurantService;
+
   @GetMapping(RESTAURANTS_API)
   public ResponseEntity<GetRestaurantsResponse> getRestaurants(
       @Valid GetRestaurantsRequest getRestaurantsRequest) {
@@ -55,7 +59,7 @@ public class RestaurantController {
           .findAllRestaurantsCloseBy(getRestaurantsRequest, LocalTime.now());
       log.info("getRestaurants returned {}", getRestaurantsResponse);
       //CHECKSTYLE:ON
-        System.out.println("sjagdj.....");
+    System.out.println("sjagdj.....");
     return ResponseEntity.ok().body(getRestaurantsResponse);
   }
 
