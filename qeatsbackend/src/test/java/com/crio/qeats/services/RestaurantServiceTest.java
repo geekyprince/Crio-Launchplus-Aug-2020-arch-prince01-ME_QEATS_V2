@@ -9,6 +9,7 @@ package com.crio.qeats.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -20,11 +21,14 @@ import com.crio.qeats.exchanges.GetRestaurantsRequest;
 import com.crio.qeats.exchanges.GetRestaurantsResponse;
 import com.crio.qeats.repositoryservices.RestaurantRepositoryService;
 import com.crio.qeats.utils.FixtureHelpers;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -63,7 +67,6 @@ class RestaurantServiceTest {
   }
 
   private String getServingRadius(List<Restaurant> restaurants, LocalTime timeOfService) {
-    System.out.println(timeOfService);
     when(restaurantRepositoryServiceMock
         .findAllRestaurantsCloseBy(any(Double.class), any(Double.class), any(LocalTime.class),
             any(Double.class)))

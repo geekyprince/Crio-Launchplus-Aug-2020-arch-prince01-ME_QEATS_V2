@@ -57,6 +57,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GetRestaurantsResponse {
   @NotNull
-  private List<Restaurant> restaurants = new ArrayList<>();
+  private List<Restaurant> restaurants;
 }
 
