@@ -15,12 +15,10 @@ import com.crio.qeats.exchanges.GetRestaurantsResponse;
 import com.crio.qeats.repositoryservices.RestaurantRepositoryService;
 import com.crio.qeats.utils.FixtureHelpers;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
