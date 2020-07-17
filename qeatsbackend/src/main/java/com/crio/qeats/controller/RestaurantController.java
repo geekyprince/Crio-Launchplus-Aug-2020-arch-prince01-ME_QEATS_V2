@@ -78,6 +78,7 @@ public class RestaurantController {
       }
       rest.setName(result);
     }
+    getRestaurantsResponse.setRestaurants(listofrest);
     return ResponseEntity.ok().body(getRestaurantsResponse);
   }
 
