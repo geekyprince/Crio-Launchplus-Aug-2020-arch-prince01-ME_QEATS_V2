@@ -58,10 +58,10 @@ public class RestaurantController {
     GetRestaurantsResponse getRestaurantsResponse;
 
       //CHECKSTYLE:OFF
-    getRestaurantsResponse = restaurantService
-        .findAllRestaurantsCloseBy(getRestaurantsRequest, LocalTime.now());
-    log.info("getRestaurants returned {}", getRestaurantsResponse);
-    //CHECKSTYLE:ON
+      getRestaurantsResponse = restaurantService
+          .findAllRestaurantsCloseBy(getRestaurantsRequest, LocalTime.now());
+      log.info("getRestaurants returned {}", getRestaurantsResponse);
+      //CHECKSTYLE:ON
     List<Restaurant> listofrest = getRestaurantsResponse.getRestaurants();
     for (Restaurant rest : listofrest) {
       String restaurantname = rest.getName();
@@ -77,6 +77,7 @@ public class RestaurantController {
       rest.setName(result);
     }
     getRestaurantsResponse.setRestaurants(listofrest);
+    return ResponseEntity.ok().body(getRestaurantsResponse);
     System.out.println("sjagdj.....");
     return ResponseEntity.ok().body(getRestaurantsResponse);
   }
