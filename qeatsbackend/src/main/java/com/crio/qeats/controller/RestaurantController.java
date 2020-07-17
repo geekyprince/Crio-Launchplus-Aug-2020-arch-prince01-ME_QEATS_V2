@@ -77,7 +77,6 @@ public class RestaurantController {
       rest.setName(result);
     }
     getRestaurantsResponse.setRestaurants(listofrest);
-    return ResponseEntity.ok().body(getRestaurantsResponse);
     System.out.println("sjagdj.....");
     return ResponseEntity.ok().body(getRestaurantsResponse);
   }
