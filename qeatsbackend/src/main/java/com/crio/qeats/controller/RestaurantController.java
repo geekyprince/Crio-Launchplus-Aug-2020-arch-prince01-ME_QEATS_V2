@@ -64,21 +64,6 @@ public class RestaurantController {
       //CHECKSTYLE:ON
     
     System.out.println("sjagdj.....");
-    List<Restaurant> listofrest = getRestaurantsResponse.getRestaurants();
-    for (Restaurant rest : listofrest) {
-      String restaurantname = rest.getName();
-      String result = ""; 
-      for (int i = 0;i < restaurantname.length();i++) {
-        int code = restaurantname.charAt(i);
-        if (code > 19 && code < 173) {
-          result = result.concat(restaurantname.charAt(i) + "");
-        } else {
-          result = result.concat("a");
-        }
-      }
-      rest.setName(result);
-    }
-    getRestaurantsResponse.setRestaurants(listofrest);
     return ResponseEntity.ok().body(getRestaurantsResponse);
   }
 
