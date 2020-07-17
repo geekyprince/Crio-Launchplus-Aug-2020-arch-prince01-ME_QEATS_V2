@@ -7,6 +7,7 @@
 package com.crio.qeats.repositoryservices;
 
 import ch.hsr.geohash.GeoHash;
+
 import com.crio.qeats.dto.Restaurant;
 import com.crio.qeats.globals.GlobalConstants;
 import com.crio.qeats.models.RestaurantEntity;
@@ -28,6 +29,10 @@ import java.util.concurrent.Future;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.inject.Provider;
+import javax.swing.text.html.parser.Entity;
+
+import lombok.extern.log4j.Log4j2;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -37,7 +42,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
-
+@Log4j2
 @Service
 @Primary
 public class RestaurantRepositoryServiceImpl implements RestaurantRepositoryService {
@@ -73,15 +78,17 @@ public class RestaurantRepositoryServiceImpl implements RestaurantRepositoryServ
       //CHECKSTYLE:OFF
       //CHECKSTYLE:ON.
     List<RestaurantEntity> restaurantList = mongoTemplate.findAll(RestaurantEntity.class);
+    log.info(restaurantList);
     ModelMapper modelMapper = modelMapperProvider.get();
     for (RestaurantEntity restaurantEntity : restaurantList) {
+      restaurantEntity.setName("Dummy restaurant");
       if (isRestaurantCloseByAndOpen(restaurantEntity,
           currentTime, latitude, longitude, servingRadiusInKms)) {
         restaurants.add(modelMapper.map(restaurantEntity, Restaurant.class));
       }
     }
     System.out.println(restaurants.size());
-    return restaurants;
+    return restaurants.subList(0, 8 > restaurants.size() ? restaurants.size() : 8); 
   }
 
 
