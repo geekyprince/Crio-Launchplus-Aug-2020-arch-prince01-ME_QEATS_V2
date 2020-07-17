@@ -88,7 +88,7 @@ public class RestaurantRepositoryServiceImpl implements RestaurantRepositoryServ
       }
     }
     System.out.println(restaurants.size());
-    return restaurants.subList(0, 8 > restaurants.size() ? restaurants.size() : 8); 
+    return restaurants; 
   }
 
 
