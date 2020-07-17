@@ -58,11 +58,25 @@ public class RestaurantController {
     GetRestaurantsResponse getRestaurantsResponse;
 
       //CHECKSTYLE:OFF
-      getRestaurantsResponse = restaurantService
-          .findAllRestaurantsCloseBy(getRestaurantsRequest, LocalTime.now());
-      log.info("getRestaurants returned {}", getRestaurantsResponse);
-      //CHECKSTYLE:ON
-    
+    getRestaurantsResponse = restaurantService
+        .findAllRestaurantsCloseBy(getRestaurantsRequest, LocalTime.now());
+    log.info("getRestaurants returned {}", getRestaurantsResponse);
+    //CHECKSTYLE:ON
+    List<Restaurant> listofrest = getRestaurantsResponse.getRestaurants();
+    for (Restaurant rest : listofrest) {
+      String restaurantname = rest.getName();
+      String result = ""; 
+      for (int i = 0;i < restaurantname.length();i++) {
+        int code = restaurantname.charAt(i);
+        if (code > 19 && code < 173) {
+          result = result.concat(restaurantname.charAt(i) + "");
+        } else {
+          result = result.concat("a");
+        }
+      }
+      rest.setName(result);
+    }
+    getRestaurantsResponse.setRestaurants(listofrest);
     System.out.println("sjagdj.....");
     return ResponseEntity.ok().body(getRestaurantsResponse);
   }

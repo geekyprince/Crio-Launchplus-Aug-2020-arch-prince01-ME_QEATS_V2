@@ -81,7 +81,6 @@ public class RestaurantRepositoryServiceImpl implements RestaurantRepositoryServ
     log.info(restaurantList);
     ModelMapper modelMapper = modelMapperProvider.get();
     for (RestaurantEntity restaurantEntity : restaurantList) {
-      restaurantEntity.setName("Dummy restaurant");
       if (isRestaurantCloseByAndOpen(restaurantEntity,
           currentTime, latitude, longitude, servingRadiusInKms)) {
         restaurants.add(modelMapper.map(restaurantEntity, Restaurant.class));
