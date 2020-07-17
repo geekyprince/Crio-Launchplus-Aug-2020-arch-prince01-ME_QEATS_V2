@@ -55,6 +55,7 @@ import lombok.NoArgsConstructor;
 // }
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class GetRestaurantsResponse {
   @NotNull
   private List<Restaurant> restaurants;
