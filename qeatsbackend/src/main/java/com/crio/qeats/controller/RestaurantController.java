@@ -6,11 +6,14 @@
 
 package com.crio.qeats.controller;
 
+import com.crio.qeats.dto.Restaurant;
 import com.crio.qeats.exchanges.GetRestaurantsRequest;
 import com.crio.qeats.exchanges.GetRestaurantsResponse;
 import com.crio.qeats.services.RestaurantService;
 
 import java.time.LocalTime;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import lombok.extern.log4j.Log4j2;
@@ -59,7 +62,12 @@ public class RestaurantController {
           .findAllRestaurantsCloseBy(getRestaurantsRequest, LocalTime.now());
       log.info("getRestaurants returned {}", getRestaurantsResponse);
       //CHECKSTYLE:ON
+    
     System.out.println("sjagdj.....");
+    List<Restaurant> listofrest = getRestaurantsResponse.getRestaurants();
+    for (Restaurant restaurant : listofrest) {
+      restaurant.setName("Dummy restaurant");
+    }
     return ResponseEntity.ok().body(getRestaurantsResponse);
   }
 
