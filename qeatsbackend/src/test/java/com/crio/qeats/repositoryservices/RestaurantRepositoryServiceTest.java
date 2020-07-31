@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.crio.qeats.QEatsApplication;
+import com.crio.qeats.configs.RedisConfiguration;
 import com.crio.qeats.dto.Restaurant;
 import com.crio.qeats.models.RestaurantEntity;
 import com.crio.qeats.utils.FixtureHelpers;
@@ -32,9 +33,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import redis.embedded.RedisServer;
 
-// TODO: CRIO_TASK_MODULE_NOSQL
-// Pass all the RestaurantRepositoryService test cases.
-// Make modifications to the tests if necessary.
 @SpringBootTest(classes = {QEatsApplication.class})
 @ActiveProfiles("test")
 public class RestaurantRepositoryServiceTest {
@@ -50,12 +48,21 @@ public class RestaurantRepositoryServiceTest {
   @Autowired
   private Provider<ModelMapper> modelMapperProvider;
 
+  @Autowired
+  private RedisConfiguration redisConfiguration;
 
   @Value("${spring.redis.port}")
   private int redisPort;
 
   private RedisServer server = null;
 
+  @BeforeEach
+  public void setupRedisServer() throws IOException {
+    System.out.println("Redis port = " + redisPort);
+    redisConfiguration.setRedisPort(redisPort);
+    server = new RedisServer(redisPort);
+    server.start();
+  }
 
 
   @BeforeEach
@@ -69,6 +76,8 @@ public class RestaurantRepositoryServiceTest {
   @AfterEach
   void teardown() {
     mongoTemplate.dropCollection("restaurants");
+    redisConfiguration.destroyCache();
+    server.stop();
   }
 
   @Test
@@ -124,11 +133,9 @@ public class RestaurantRepositoryServiceTest {
 
 
   void searchedAttributesIsSubsetOfRetrievedRestaurantAttributes() {
-    // TODO
   }
 
   void searchedAttributesIsCaseInsensitive() {
-    // TODO
   }
 
   private List<RestaurantEntity> listOfRestaurants() throws IOException {
